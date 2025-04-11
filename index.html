@@ -3,13 +3,33 @@
 <head>
 <meta charset="utf-8">
 <title>法医素材库</title>
+<style>
+#videoBox {border: 10px solid #212223; transition: 0.5;}
+video { width: 100%; vertical-align: bottom;}
+ 
+#videoBox.in { animation: ac 1;}
+ 
+#videoBox.out { position: fixed; bottom: 0; right: 0; width: 300px; z-index: 999; animation: an 0.5;}                
+<style>
 </head>
 <body>
 
+<scripttype="text/javascript"src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js">
+</script>
+
 <h1>我的第一个视频</h1>
+
 <video width="320" height="240" controls autoplay loop>
   <source src="a37723c9f869f75340fbcb4397a33d9b.mp4" type="video/mp4">
 </video>
+
+<div id="videoBox" class="box">
+ 
+  <video width="400" controls autoplay loop>
+    <source src="sample.mp4" type="video/mp4"> 
+  </video>
+ 
+</div>     
 
 </body>
 </html>
