@@ -3,19 +3,61 @@
 <head>
 <meta charset="utf-8">
 <title>法医素材库</title>
-<style>
-#videoBox {border: 10px solid #212223; transition: 0.5;}
-video { width: 100%; vertical-align: bottom;}
- 
-#videoBox.in { animation: ac 1;}
- 
-#videoBox.out { position: fixed; bottom: 0; right: 0; width: 300px; z-index: 999; animation: an 0.5;}                
-</style>
+    <style>
+        body {
+            height: 2000px; 
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .fixed-video-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            overflow: hidden;
+            transition: transform 0.3 ease;
+        }
+        
+        .fixed-video-player:hover {
+            transform: scale(1.05);
+        }
+        
+        .fixed-video-player video {
+            width: 100%;
+            display: block;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .video-minimized {
+            width: 150px !important;
+            opacity: 0.8;
+        }
+    </style>
 </head>
 <body>
-
-<scripttype="text/javascript"src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js">
-</script>
 
 <h1>我的第一个视频</h1>
 
@@ -30,6 +72,32 @@ video { width: 100%; vertical-align: bottom;}
   </video>
  
 </div>     
+<div class="fixed-video-player" id="floatingVideo">
+        <button class="close-btn" id="closeBtn">×</button>
+        <video controls>
+            <source src="a37723c9f869f75340fbcb4397a33d9b.mp4" type="video/mp4">
+            您的浏览器不支持HTML5视频
+        </video>
+    </div>
+
+    <script>
+        // 关闭按钮功能
+        document.getElementById('closeBtn').addEventListener('click', function() {
+            const videoPlayer = document.getElementById('floatingVideo');
+            videoPlayer.classList.toggle('video-minimized');
+            
+            // 切换关闭按钮文本
+            this.textContent = videoPlayer.classList.contains('video-minimized') ? '+' : '×';
+        });
+        
+        // 点击最小化播放器时恢复
+        document.getElementById('floatingVideo').addEventListener('click', function(e) {
+            if (e.target === this && this.classList.contains('video-minimized')) {
+                this.classList.remove('video-minimized');
+                document.getElementById('closeBtn').textContent = '×';
+            }
+        });
+    </script>
 <p>这是一个段落。</p>
 <p>这是一个段落。</p>
 <p>这是一个段落。</p>
